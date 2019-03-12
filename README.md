@@ -75,8 +75,132 @@ All object references are initialized to null in Java.
 The constructor can be defined as the special type of method that is used to initialize the state of an object. It is invoked when the class is instantiated, and the memory is allocated for the object. Every time, an object is created using the new keyword, the default constructor of the class is called. The name of the constructor must be similar to the class name. The constructor must not have an explicit return type.
 # Is constructor inherited?
 No, The constructor is not inherited.
+# Can we overload the constructors?
+Yes, the constructors can be overloaded by changing the number of arguments accepted by the constructor or by changing the data type of the parameters. Consider the following example.
+
+class Test   
+{  
+    int i;   
+    public Test(int k)  
+    {  
+        i=k;  
+    }  
+    public Test(int k, int m)  
+    {  
+        System.out.println("Hi I am assigning the value max(k, m) to i");  
+        if(k>m)  
+        {  
+            i=k;   
+        }  
+        else   
+        {  
+            i=m;  
+        }  
+    }  
+}  
+public class Main   
+{  
+    public static void main (String args[])   
+    {  
+        Test test1 = new Test(10);  
+        Test test2 = new Test(12, 15);  
+        System.out.println(test1.i);  
+        System.out.println(test2.i);  
+    }  
+}  
+      
+In the above program, The constructor Test is overloaded with another constructor. In the first call to the constructor, The constructor with one argument is called, and i will be initialized with the value 10. However, In the second call to the constructor, The constructor with the 2 arguments is called, and i will be initialized with the value 15.
+
+
 # Can you make a constructor final?
 No, the constructor can't be final.
+# What is the purpose of a default constructor?
+The purpose of the default constructor is to assign the default value to the objects. The java compiler creates a default constructor implicitly if there is no constructor in the class.
+
+class Student3{  
+int id;  
+String name;  
+  
+void display(){System.out.println(id+" "+name);}  
+  
+public static void main(String args[]){  
+Student3 s1=new Student3();  
+Student3 s2=new Student3();  
+s1.display();  
+s2.display();  
+}  
+}  
+Test it Now
+Output:
+
+0 null
+0 null
+# can be override the constructor(N0)
+# What is the output of the following Java program?
+class Test   
+{  
+    int i;   
+}  
+public class Main   
+{  
+    public static void main (String args[])   
+    {  
+        Test test = new Test();   
+        System.out.println(test.i);  
+    }  
+}  
+The output of the program is 0 because the variable i is initialized to 0 internally. As we know that a default constructor is invoked implicitly if there is no constructor in the class, the variable i is initialized to 0 since there is no constructor in the class.
+# What is the output of the following Java program?
+class Test   
+{  
+    int test_a, test_b;  
+    Test(int a, int b)   
+    {  
+    test_a = a;   
+    test_b = b;   
+    }  
+    public static void main (String args[])   
+    {  
+        Test test = new Test();   
+        System.out.println(test.test_a+" "+test.test_b);  
+    }  
+} 
+There is a compiler error in the program because there is a call to the default constructor in the main method which is not present in the class. However, there is only one parameterized constructor in the class Test. Therefore, no default constructor is invoked by the constructor implicitly.
+
+# How can constructor chaining be done using this keyword?
+Constructor chaining enables us to call one constructor from another constructor of the class with respect to the current class object. We can use this keyword to perform constructor chaining within the same class. Consider the following example which illustrates how can we use this keyword to achieve constructor chaining.
+
+public class Employee  
+{  
+    int id,age;   
+    String name, address;  
+    public Employee (int age)  
+    {  
+        this.age = age;  
+    }  
+    public Employee(int id, int age)  
+    {  
+        this(age);  
+        this.id = id;  
+    }  
+    public Employee(int id, int age, String name, String address)  
+    {  
+        this(id, age);  
+        this.name = name;   
+        this.address = address;   
+    }  
+    public static void main (String args[])  
+    {  
+        Employee emp = new Employee(105, 22, "Vikas", "Delhi");  
+        System.out.println("ID: "+emp.id+" Name:"+emp.name+" age:"+emp.age+" address: "+emp.address);  
+    }  
+      
+}  
+Output
+
+ID: 105 Name:Vikas age:22 address: Delhi
+
+
 # What are the differences between the constructors and methods?
 Java Constructor	                                                    Java Method
 A constructor is used to initialize the state of an object.  	A method is used to expose the behavior of an object.
@@ -164,6 +288,441 @@ public class Test
 Output
 
 10
+# What is the Inheritance?
+Inheritance is a mechanism by which one object acquires all the properties and behavior of another object of another class. It is used for Code Reusability and Method Overriding. The idea behind inheritance in Java is that you can create new classes that are built upon existing classes. When you inherit from an existing class, you can reuse methods and fields of the parent class. Moreover, you can add new methods and fields in your current class also. Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
+
+There are five types of inheritance in Java.
+
+Single-level inheritance
+Multi-level inheritance
+Multiple Inheritance
+Hierarchical Inheritance
+Hybrid Inheritance
+# Multiple inheritance is not supported in Java through class.
+To reduce the complexity and simplify the language, multiple inheritance is not supported in java. Consider a scenario where A, B, and C are three classes. The C class inherits A and B classes. If A and B classes have the same method and you call it from child class object, there will be ambiguity to call the method of A or B class.
+
+Since the compile-time errors are better than runtime errors, Java renders compile-time error if you inherit 2 classes. So whether you have the same method or different, there will be a compile time error.
+
+class A{  
+void msg(){System.out.println("Hello");}  
+}  
+class B{  
+void msg(){System.out.println("Welcome");}  
+}  
+class C extends A,B{//suppose if it were  
+   
+ Public Static void main(String args[]){  
+   C obj=new C();  
+   obj.msg();//Now which msg() method would be invoked?  
+}  
+}  
+Test it Now
+ Compile Time Error
+#  Which class is the superclass for all the classes?
+The object class is the superclass of all other classes in Java.
+# What is aggregation?
+Aggregation can be defined as the relationship between two classes where the aggregate class contains a reference to the class it owns. Aggregation is best described as a has-a relationship. For example, The aggregate class Employee having various fields such as age, name, and salary also contains an object of Address class having various fields such as Address-Line 1, City, State, and pin-code. In other words, we can say that Employee (class) has an object of Address class. Consider the following example.
+
+Address.java
+
+public class Address {  
+String city,state,country;  
+  
+public Address(String city, String state, String country) {  
+    this.city = city;  
+    this.state = state;  
+    this.country = country;  
+}  
+  
+}  
+Employee.java
+
+public class Emp {  
+int id;  
+String name;  
+Address address;  
+  
+public Emp(int id, String name,Address address) {  
+    this.id = id;  
+    this.name = name;  
+    this.address=address;  
+}  
+  
+void display(){  
+System.out.println(id+" "+name);  
+System.out.println(address.city+" "+address.state+" "+address.country);  
+}  
+  
+public static void main(String[] args) {  
+Address address1=new Address("gzb","UP","india");  
+Address address2=new Address("gno","UP","india");  
+  
+Emp e=new Emp(111,"varun",address1);  
+Emp e2=new Emp(112,"arun",address2);  
+      
+e.display();  
+e2.display();  
+      
+}  
+}  
+Output
+
+111 varun
+gzb UP india
+112 arun
+gno UP india 
+# What is composition?
+Holding the reference of a class within some other class is known as composition. When an object contains the other object, if the contained object cannot exist without the existence of container object, then it is called composition. In other words, we can say that composition is the particular case of aggregation which represents a stronger relationship between two objects. Example: A class contains students. A student cannot exist without a class. There exists composition between class and students.
+# What is the difference between aggregation and composition?
+Aggregation represents the weak relationship whereas composition represents the strong relationship. For example, the bike has an indicator (aggregation), but the bike has an engine (composition).
+# Why does Java not support pointers?
+The pointer is a variable that refers to the memory address. They are not used in Java because they are unsafe(unsecured) and complex to understand.
+# What is super in java?
+The super keyword in Java is a reference variable that is used to refer to the immediate parent class object. Whenever you create the instance of the subclass, an instance of the parent class is created implicitly which is referred by super reference variable. The super() is called in the class constructor implicitly by the compiler if there is no super or this.
+
+class Animal{  
+Animal(){System.out.println("animal is created");}  
+}  
+class Dog extends Animal{  
+Dog(){  
+System.out.println("dog is created");  
+}  
+}  
+class TestSuper4{  
+public static void main(String args[]){  
+Dog d=new Dog();  
+}  
+}  
+Test it Now
+Output:
+
+animal is created
+dog is created
+# How can constructor chaining be done by using the super keyword?
+class Person  
+{  
+    String name,address;   
+    int age;  
+    public Person(int age, String name, String address)  
+    {  
+        this.age = age;  
+        this.name = name;  
+        this.address = address;  
+    }  
+}  
+class Employee extends Person   
+{  
+    float salary;  
+    public Employee(int age, String name, String address, float salary)  
+    {  
+        super(age,name,address);  
+        this.salary = salary;  
+    }  
+}  
+public class Test   
+{  
+    public static void main (String args[])  
+    {  
+        Employee e = new Employee(22, "Mukesh", "Delhi", 90000);  
+        System.out.println("Name: "+e.name+" Salary: "+e.salary+" Age: "+e.age+" Address: "+e.address);  
+    }  
+}  
+Output
+
+Name: Mukesh Salary: 90000.0 Age: 22 Address: Delhi
+# What are the main uses of the super keyword?
+There are the following uses of super keyword.
+
+super can be used to refer to the immediate parent class instance variable.
+super can be used to invoke the immediate parent class method.
+super() can be used to invoke immediate parent class constructor.
+# What are the differences between this and super keyword?
+There are the following differences between this and super keyword.
+
+The super keyword always points to the parent class contexts whereas this keyword always points to the current class context.
+The super keyword is primarily used for initializing the base class variables within the derived class constructor whereas this keyword primarily used to differentiate between local and instance variables when passed in the class constructor.
+The super and this must be the first statement inside constructor otherwise the compiler will throw an error.
+# What is the output of the following Java program?
+class Person   
+{  
+    public Person()   
+    {  
+        System.out.println("Person class constructor called");  
+    }  
+}  
+public class Employee extends Person   
+{  
+    public Employee()   
+    {  
+        System.out.println("Employee class constructor called");  
+    }  
+    public static void main (String args[])  
+    {  
+        Employee e = new Employee();  
+    }  
+}  
+Output
+
+Person class constructor called
+Employee class constructor called
+Explanation
+
+The super() is implicitly invoked by the compiler if no super() or this() is included explicitly within the derived class constructor. Therefore, in this case, The Person class constructor is called first and then the Employee class constructor is called.
+# Can you use this() and super() both in a constructor?
+No, because this() and super() must be the first statement in the class constructor.
+
+Example:
+
+public class Test{  
+    Test()  
+     {  
+         super();   
+         this();  
+         System.out.println("Test class object is created");  
+     }  
+     public static void main(String []args){  
+     Test t = new Test();  
+     }  
+}  
+Output:
+
+Test.java:5: error: call to this must be first statement in constructor
+# What is object cloning?
+The object cloning is used to create the exact copy of an object. The clone() method of the Object class is used to clone an object. The java.lang.Cloneable interface must be implemented by the class whose object clone we want to create. If we don't implement Cloneable interface, clone() method generates CloneNotSupportedException.
+# What is method overriding:
+If a subclass provides a specific implementation of a method that is already provided by its parent class, it is known as Method Overriding. It is used for runtime polymorphism and to implement the interface methods.
+-Rules for Method overriding
+The method must have the same name as in the parent class.
+The method must have the same signature as in the parent class.
+Two classes must have an IS-A relationship between them
+# Can we override the static method?
+No, you can't override the static method because they are the part of the class, not the object.
+# Why can we not override static method?
+It is because the static method is the part of the class, and it is bound with class whereas instance method is bound with the object, and static gets memory in class area, and instance gets memory in a heap.
+# Can we override the overloaded method?
+Yes.
+# Difference between method Overloading and Overriding.
+Method Overloading	                                             Method Overriding
+1) Method overloading increases the readability of the program.	Method overriding provides the specific implementation of the method that is already provided by its superclass.
+2) Method overloading occurs within the class.	       Method overriding occurs in two classes that have IS-A relationship between them.
+3) In this case, the parameters must be different.	       In this case, the parameters must be the same.
+4) return type may or may no be same                                Return type must be same
+# Can we override the private methods?
+No, we cannot override the private methods because the scope of private methods is limited to the class and we cannot access them outside of the class.
+# Can we change the scope of the overridden method in the subclass?
+Yes, we can change the scope of the overridden method in the subclass. However, we must notice that we cannot decrease the accessibility of the method. The following point must be taken care of while changing the accessibility of the method.
+
+The private can be changed to protected, public, or default.
+The protected can be changed to public or default.
+The default can be changed to public.
+The public will always remain public.
+# What is the output of the following Java program?
+class Base  
+{  
+    void method(int a)  
+    {  
+        System.out.println("Base class method called with integer a = "+a);  
+    }  
+       
+    void method(double d)  
+    {  
+        System.out.println("Base class method called with double d ="+d);  
+    }  
+}  
+   
+class Derived extends Base  
+{  
+    @Override  
+    void method(double d)  
+    {  
+        System.out.println("Derived class method called with double d ="+d);  
+    }  
+}  
+   
+public class Main  
+{      
+    public static void main(String[] args)  
+    {  
+        new Derived().method(10);  
+    }  
+}  
+Output
+
+Base class method called with integer a = 10
+Explanation
+
+The method() is overloaded in class Base whereas it is derived in class Derived with the double type as the parameter. In the method call, the integer is passed.
+ # What is the output of the following Java program?
+class Base   
+{  
+    public void baseMethod()  
+    {  
+        System.out.println("BaseMethod called ...");  
+    }  
+}  
+class Derived extends Base   
+{  
+    public void baseMethod()  
+    {  
+        System.out.println("Derived method called ...");  
+    }  
+}  
+public class Test   
+{  
+    public static void main (String args[])  
+    {  
+        Base b = new Derived();  
+        b.baseMethod();  
+    }  
+}  
+Output
+
+Derived method called ...
+Explanation
+
+The method of Base class, i.e., baseMethod() is overridden in Derived class. In Test class, the reference variable b (of type Base class) refers to the instance of the Derived class. Here, Runtime polymorphism is achieved between class Base and Derived. At compile time, the presence of method baseMethod checked in Base class, If it presence then the program compiled otherwise the compiler error will be shown. In this case, baseMethod is present in Base class; therefore, it is compiled successfully. However, at runtime, It checks whether the baseMethod has been overridden by Derived class, if so then the Derived class method is called otherwise Base class method is called. In this case, the Derived class overrides the baseMethod; therefore, the Derived class method is called.
+# Can you declare the main method as final?
+Yes, We can declare the main method as public static final void main(String[] args){}.
+# Can we declare a constructor as final?
+The constructor can never be declared as final because it is never inherited. Constructors are not ordinary methods; therefore, there is no sense to declare constructors as final. However, if you try to do so, The compiler will throw an error.
+
+# Can we declare an interface as final?
+No, we cannot declare an interface as final because the interface must be implemented by some class to provide its definition. Therefore, there is no sense to make an interface final. However, if you try to do so, the compiler will show an error.
+# What is the difference between the final method and abstract method?
+The main difference between the final method and abstract method is that the abstract method cannot be final as we need to override them in the subclass to give its definition
+# What is the difference between compile-time polymorphism and runtime polymorphism?
+There are the following differences between compile-time polymorphism and runtime polymorphism.
+
+SN	compile-time polymorphism	                                                 Runtime polymorphism
+1)	In compile-time polymorphism, call to a method is resolved at compile-time.	In runtime polymorphism, call to an overridden method is resolved at runtime.
+2)	It is also known as static binding, early binding, or overloading.	It is also known as dynamic binding, late binding, overriding, or dynamic method dispatch.
+3)	Overloading is a way to achieve compile-time polymorphism in which, we can define multiple methods or constructors with different signatures.	Overriding is a way to achieve runtime polymorphism in which, we can redefine some particular method or variable in the derived class. By using overriding, we can give some specific implementation to the base class properties in the derived class.
+4)	It provides fast execution because the type of an object is determined at compile-time.	It provides slower execution as compare to compile-time because the type of an object is determined at run-time.
+5)	Compile-time polymorphism provides less flexibility because all the things are resolved at compile-time.	Run-time polymorphism provides more flexibility because all the things are resolved at runtime.
+# What is Runtime Polymorphism?
+In case of upcasting ,when we call or invoke a overriden method then implementation or defination executed from subclass.
+class Bike{  
+  void run(){System.out.println("running");}  
+}  
+class Splendor extends Bike{  
+  void run(){System.out.println("running safely with 60km");}  
+  public static void main(String args[]){  
+    Bike b = new Splendor();//upcasting  
+    b.run();  
+  }  
+}  
+Test it Now
+Output:
+running safely with 60km.
+# Can you achieve Runtime Polymorphism by data members?
+No, because method overriding is used to achieve runtime polymorphism and data members cannot be overridden. We can override the member functions but not the data members. Consider the example given below.
+
+class Bike{  
+ int speedlimit=90;  
+}  
+class Honda3 extends Bike{  
+ int speedlimit=150;  
+ public static void main(String args[]){  
+  Bike obj=new Honda3();  
+  System.out.println(obj.speedlimit);//90  
+   }  
+Test it Now
+Output:
+90
+# What is the difference between static binding and dynamic binding?
+In case of the static binding, the type of the object is determined at compile-time whereas, in the dynamic binding, the type of the object is determined at runtime.
+
+Static Binding
+class Dog{  
+ private void eat(){System.out.println("dog is eating...");}  
+  
+ public static void main(String args[]){  
+  Dog d1=new Dog();  
+  d1.eat();  
+ }  
+}  
+Dynamic Binding
+class Animal{  
+ void eat(){System.out.println("animal is eating...");}  
+}  
+  
+class Dog extends Animal{  
+ void eat(){System.out.println("dog is eating...");}  
+  
+ public static void main(String args[]){  
+  Animal a=new Dog();  
+  a.eat();  
+ }  
+} 
+# What is the output of the following Java program?
+class BaseTest   
+{  
+  void print()  
+  {  
+    System.out.println("BaseTest:print() called");  
+  }  
+}  
+public class Test extends BaseTest   
+{  
+  void print()   
+  {  
+    System.out.println("Test:print() called");  
+  }  
+  public static void main (String args[])  
+  {  
+    BaseTest b = new Test();  
+    b.print();  
+  }  
+}  
+Output
+
+  Test:print() called
+  # What is Java instanceOf operator?
+The instanceof in Java is also known as type comparison operator because it compares the instance with type. It returns either true or false. If we apply the instanceof operator with any variable that has a null value, it returns false. Consider the following example.
+
+class Simple1{  
+ public static void main(String args[]){  
+ Simple1 s=new Simple1();  
+ System.out.println(s instanceof Simple1);//true  
+ }  
+}  
+Test it Now
+Output
+true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         ^
