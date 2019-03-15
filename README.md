@@ -199,8 +199,8 @@ public class Employee
 Output
 
 ID: 105 Name:Vikas age:22 address: Delhi
-
-
+# What's the order of call of constructors in inheritiance?
+Ans: In case of inheritance, when a new object of a derived class is created, first the constructor of the super class is invoked and then the constructor of the derived class is invoked.
 # What are the differences between the constructors and methods?
 Java Constructor	                                                    Java Method
 A constructor is used to initialize the state of an object.  	A method is used to expose the behavior of an object.
