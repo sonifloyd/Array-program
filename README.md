@@ -705,6 +705,44 @@ The Exception object will be garbage collected in the next garbage collection.
 A finally block will be executed whether or not an exception is thrown and is used to release those resources held by the application. Finalize is a protected method of the Object class, which is called by the Java Virtual Machine (JVM) just before an object is garbage collected.
 # What are pass by reference and pass by value ?
 When an object is passed by value, this means that a copy of the object is passed. Thus, even if changes are made to that object, it doesn’t affect the original value. When an object is passed by reference, this means that the actual object is not passed, rather a reference of the object is passed. Thus, any changes made by the external method, are also reflected in all places.
+# What happens if you remove static modifier from the main method?
+Program compiles successfully . But at runtime throws an error “NoSuchMethodError”.
+# What is “this” keyword in java?
+Within an instance method or a constructor, this is a reference to the current object — the object whose method or constructor is being called. You can refer to any member of the current object from within an instance method or a constructor by using this.
+Usage of this keyword
+
+Used to refer current class instance variable.
+To invoke current class constructor.
+It can be passed as an argument in the method call.
+It can be passed as argument in the constructor call.
+Used to return the current class instance.
+Used to invoke current class method (implicitly)
+# What is the scope of variables in Java in following cases? 
+
+Member Variables (Class Level Scope) : The member variables must be declared inside class (outside any function). They can be directly accessed anywhere in class
+Local Variables (Method Level Scope) : Variables declared inside a method have method level scope and can’t be accessed outside the method.
+Loop Variables (Block Scope) : A variable declared inside pair of brackets “{” and “}” in a method has scope withing the brackets only.
+# Why the main method is static in java?
+The method is static because otherwise there would be ambiguity: which constructor should be called? Especially if your class looks like this:
+
+
+
+public class JavaClass
+{
+  protected JavaClass(int x)
+  {   }
+   public void main(String[] args) 
+   {
+
+    }
+}
+Should the JVM call new JavaClass(int)? What should it pass for x? If not, should the JVM instantiate JavaClass without running any constructor method? because that will special-case your entire class – sometimes you have an instance that hasn’t been initialized, and you have to check for it in every method that could be called. There are just too many edge cases and ambiguities for it to make sense for the JVM to have to instantiate a class before the entry point is called. That’s why main is static.
+# A blank final variable in Java is a final variable that is not initialized during declaration. Below is a simple example of blank final.
+
+    // A simple blank final example 
+    final int i;
+    i = 30;
+
 
 
 
