@@ -210,7 +210,7 @@ The Java compiler provides a default constructor if you don't have any construct
 The constructor name must be same as the class name.	          The method name may or may not be same as class name.
 # What is the difference between static (class) method and instance method?
        static or class method	                                                 instance method
-1)A method that is declared as static is known as the static method.	A method that is not declared as static is known as the instance method.
+1)A method that is declared as static is known as the static method.	A method that is not declared as static is known as                                                                           the instance method.
 2)We don't need to create the objects to call the static methods.	The object is required to call the instance methods.
 3)Non-static (instance) members cannot be accessed in the static context (static method, static block, and static nested class) directly.	Static and non-static variables both can be accessed in instance methods.
 4)For example: public static int cube(int n){ return n*n*n;}	For example: public void msg(){...}.
@@ -503,8 +503,8 @@ It is because the static method is the part of the class, and it is bound with c
 Yes.
 # Difference between method Overloading and Overriding.
 Method Overloading	                                             Method Overriding
-1) Method overloading increases the readability of the program.	Method overriding provides the specific implementation of the method that is already provided by its superclass.
-2) Method overloading occurs within the class.	       Method overriding occurs in two classes that have IS-A relationship between them.
+1) Method overloading increases the redability of the program.	Method overriding provides the specific implementation of                                                                       the method that is already provided by its superclass.
+2) Method overloading occurs within the class.	       Method overriding occurs in two classes that have IS-A relationship                                                            between them                 
 3) In this case, the parameters must be different.	       In this case, the parameters must be the same.
 4) return type may or may no be same                                Return type must be same
 # Can we override the private methods?
@@ -737,6 +737,7 @@ public class JavaClass
     }
 }
 Should the JVM call new JavaClass(int)? What should it pass for x? If not, should the JVM instantiate JavaClass without running any constructor method? because that will special-case your entire class – sometimes you have an instance that hasn’t been initialized, and you have to check for it in every method that could be called. There are just too many edge cases and ambiguities for it to make sense for the JVM to have to instantiate a class before the entry point is called. That’s why main is static.
+This is neccesary because main() is called by the JVM before any objects are made. Since it is static it can be directly invoked via the class. Similarly, we use static sometime for user defined methods so that we need not to make objects. void indicates that the main() method being declared does not return a value.
 # A blank final variable in Java is a final variable that is not initialized during declaration. Below is a simple example of blank final.
 
     // A simple blank final example 
